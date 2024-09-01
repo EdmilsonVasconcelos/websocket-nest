@@ -9,21 +9,24 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: chat
-    volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     ports:
       - '27017:27017'
+    networks:
+      - my_network
 
-  app:
-    build: .
+  nest_app:
     container_name: nest_app
+    build: .
     restart: always
     ports:
       - '3000:3000'
     depends_on:
       - mongo_db
     environment:
-      MONGO_URI: mongodb://root:root@mongo_db:27017/chat
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - MONGO_URI=mongodb://root:root@mongo_db:27017/chat
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
