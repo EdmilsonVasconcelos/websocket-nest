@@ -23,7 +23,7 @@ services:
     depends_on:
       - mongo_db
     environment:
-      MONGO_URI: mongodb://root:root@mongo_db:27017/chat?authSource=admin
+      MONGO_URI: mongodb://root:root@mongo_db:27017/chat
     volumes:
       - .:/app
       - /app/node_modules
