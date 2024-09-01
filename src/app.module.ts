@@ -7,7 +7,9 @@ import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGO_URL),
+    MongooseModule.forRoot(
+      'mongodb://mongo:NotpvISdzCmdmsVbnteazmomhRtFlqKf@mongodb.railway.internal:27017',
+    ),
     ChatModule,
     NotificationsModule,
   ],
