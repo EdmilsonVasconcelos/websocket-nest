@@ -23,7 +23,7 @@ services:
     depends_on:
       - mongo_db
     environment:
-      - MONGO_URI=${{MONGO_URL}}
+      - MONGO_URI=mongodb://root:root@mongo_db:27017/chat
     networks:
       - my_network
 
