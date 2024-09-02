@@ -28,8 +28,8 @@ export class NotificationsGateway
   private logger: Logger = new Logger('NotificationsGateway');
 
   @SubscribeMessage('msgToServer')
-  handleMessage(@MessageBody() payload: CreateChatDto): void {
-    this.chatService.create(payload);
+  async handleMessage(@MessageBody() payload: CreateChatDto): Promise<void> {
+    await this.chatService.create(payload);
     this.server.emit('msgToClient', payload);
   }
 

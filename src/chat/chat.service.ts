@@ -9,26 +9,26 @@ import { Chat } from './schemas/chat.schema';
 export class ChatService {
   constructor(@InjectModel('Chat') private chatModel: Model<Chat>) {}
 
-  create(createChatDto: CreateChatDto): Promise<Chat> {
+  async create(createChatDto: CreateChatDto): Promise<Chat> {
     const newChat = new this.chatModel(createChatDto);
     return newChat.save();
   }
 
-  findAll(): Promise<Chat[]> {
-    return this.chatModel.find().lean().exec();
+  async findAll(): Promise<Chat[]> {
+    return this.chatModel.find().sort({ createdAt: -1 }).lean().exec();
   }
 
-  findOne(id: string): Promise<Chat> {
+  async findOne(id: string): Promise<Chat> {
     return this.chatModel.findById(id).lean().exec();
   }
 
-  update(id: string, updateChatDto: UpdateChatDto): Promise<Chat> {
+  async update(id: string, updateChatDto: UpdateChatDto): Promise<Chat> {
     return this.chatModel
       .findByIdAndUpdate(id, updateChatDto, { new: true })
       .exec();
   }
 
-  remove(id: string): Promise<Chat> {
+  async remove(id: string): Promise<Chat> {
     return this.chatModel.findByIdAndDelete(id).exec();
   }
 }
