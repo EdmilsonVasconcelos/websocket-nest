@@ -3,10 +3,10 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Chat extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true, maxlength: 255 })
   message: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, maxlength: 50 })
   sender: string;
 
   @Prop({ default: Date.now })
